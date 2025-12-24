@@ -6,8 +6,7 @@ on:
       - '*'
 
 env:
-  H100_TORCH_REGISTRY_URL: ${{ secrets.H100_TORCH_REGISTRY_URL }}
-  V100_TORCH_REGISTRY_URL: ${{ secrets.V100_TORCH_REGISTRY_URL }}
+  REGISTRY_URL: ${{ secrets.REGISTRY_URL }}
   REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
   REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
 
@@ -39,25 +38,14 @@ jobs:
         id: select_registry
         run: |
           DIRECTORY=${{ steps.parse_tag.outputs.directory }}
-          # ディレクトリ名に基づいてレジストリURLを選択
-          case ${DIRECTORY,,} in
-            "h100-torch")
-              REGISTRY_URL=${{ env.H100_TORCH_REGISTRY_URL }}
-              ;;
-            "v100-torch")
-              REGISTRY_URL=${{ env.V100_TORCH_REGISTRY_URL }}
-              ;;
-            *)
-              echo "Unknown directory: $DIRECTORY"
-              exit 1
-              ;;
-          esac
+          # レジストリURLを使用
+          REGISTRY_URL=${{ env.REGISTRY_URL }}
           
           # レジストリURLを出力
           echo "registry_url=$REGISTRY_URL" >> $GITHUB_OUTPUT
           
           # デバッグ用に表示
-          echo "Selected registry URL: $REGISTRY_URL"
+          echo "Registry URL: $REGISTRY_URL"
 
       - name: Check if Dockerfile exists
         id: check_dockerfile
