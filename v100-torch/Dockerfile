@@ -14,8 +14,8 @@ RUN mamba install -y -n base -c conda-forge --override-channels \
     jupyter-lsp=2.2.5 \
     python-lsp-server=1.13.2 \
     r-languageserver=0.3.16 \
-    jupyter-collaboration=4.1.2 \
-    jupyter_server_ydoc=2.1.2 \
+    jupyter-collaboration=4.2.0 \
+    jupyter_server_ydoc=2.2.0 \
     jupyter_ydoc=3.3.2 \
     jupyter-server-proxy=4.4.0 \
     plotly=6.5.0 \
